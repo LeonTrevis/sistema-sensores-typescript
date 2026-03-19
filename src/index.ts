@@ -53,6 +53,17 @@ Status: ${medicao.status}
 `;
 }
 
+function listarAlertas(medicoes: Medicao[]): Medicao[] {
+  return medicoes.filter((m) => m.status === "alerta" || m.status === "critico");
+}
+
+function listarPorSensor(
+  medicoes: Medicao[],
+  sensor: Sensor
+): Medicao[] {
+  return medicoes.filter((m) => m.sensor.id === sensor.id);
+}
+
 const medicao1 = criarMedicao(
   1,
   sensorMotorA,
@@ -65,7 +76,33 @@ const medicao2 = criarMedicao(
   95,
   new Date()
 );
+const medicao3 = criarMedicao(
+  3,
+  sensorMotorA,
+  130,
+  new Date()
+);const medicao4 = criarMedicao(
+  4,
+  sensorMotorA,
+  30,
+  new Date()
+);const medicao5 = criarMedicao(
+  5,
+  sensorMotorA,
+  200,
+  new Date()
+);
 console.log("=== MEDIÇÃO 1 ===");
 console.log(exibirMedicao(medicao1));
 console.log("=== MEDIÇÃO 2 ===");
 console.log(exibirMedicao(medicao2));
+console.log("=== MEDIÇÃO 3 ===");
+console.log(exibirMedicao(medicao3));
+console.log("=== MEDIÇÃO 4 ===");
+console.log(exibirMedicao(medicao4));
+console.log("=== MEDIÇÃO 5 ===");
+console.log(exibirMedicao(medicao5));
+
+console.log ("=== ALERTAS ===");
+const alertas = listarAlertas([medicao1, medicao2, medicao3, medicao4, medicao5]);
+alertas.forEach((m) => console.log(exibirMedicao(m)));
